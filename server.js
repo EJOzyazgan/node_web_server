@@ -24,10 +24,13 @@ app.use((req, res, next) => {
 
 app.use(express.static(__dirname + '/public'));
 
+hbs.registerAsyncHelper('getCurrentYear', () => {
+    return new Date().getFullYear();
+});
+
 app.get('/', (req, res) => {
-    res.render('about.hbs', {
+    res.render('home.hbs', {
         pageTitle: "Home Page, Welcome!",
-        currentYear: new Date().getFullYear(),
         welcomeMessage: "Welcome to my website"
     })
 });
@@ -35,7 +38,6 @@ app.get('/', (req, res) => {
 app.get('/about', (req, res) => {
     res.render('about.hbs', {
         pageTitle: "About",
-        currentYear: new Date().getFullYear()
     })
 });
 
